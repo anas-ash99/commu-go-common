@@ -1,4 +1,4 @@
-package queue_broker
+package broker
 
 import (
 	"context"

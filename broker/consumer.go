@@ -1,23 +1,26 @@
 package broker
 
 import (
-	amqp "github.com/rabbitmq/amqp091-go"
 	"log"
+
+	amqp "github.com/rabbitmq/amqp091-go"
 )
 
 type QueueName string
 
 const (
-	RequestCall                     QueueName = "request_call"
-	UpdateCallStatus                QueueName = "update_call_status"
-	CallResponse                    QueueName = "call_response"
-	SaveMessageQueue                QueueName = "save_message_queue"
-	SendMsgViaWs                    QueueName = "send_msg_via_websocket"
-	SendMessageQueue                QueueName = "send_message_queue"
-	SendMsgViaNotification          QueueName = "send_msg_via_notification"
-	UpdateCallStatusViaNotification QueueName = "update_Call_status_via_notification"
-	OnlineStatusChange              QueueName = "online_status_change"
-	RequestCallViaNotification      QueueName = "request_call_via_notification"
+	RequestCall                QueueName = "request_call"
+	AnswerCall                 QueueName = "answer_call"
+	NewIceCandidate            QueueName = "ice_candidate"
+	EndCall                    QueueName = "end_call"
+	RequestCallViaNotification QueueName = "request_call_via_notification"
+
+	SaveMessageQueue       QueueName = "save_message_queue"
+	SendMsgViaWs           QueueName = "send_msg_via_websocket"
+	SendMessageQueue       QueueName = "send_message_queue"
+	SendMsgViaNotification QueueName = "send_msg_via_notification"
+
+	OnlineStatusChange QueueName = "online_status_change"
 )
 
 func (r *RabbitMq) Run(queue QueueName, processor func(headers amqp.Table, msg []byte)) {

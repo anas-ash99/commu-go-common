@@ -28,31 +28,24 @@ type Call struct {
 	Duration     *int       `json:"duration,omitempty" bson:"duration,omitempty"`
 }
 
-type CallResponse struct {
-	CallId      string `json:"callId"`
-	CallerId    string `json:"callerId"`
-	ChannelName string `json:"channelName"`
-	IsAccepted  string `json:"isAccepted"`
+type OfferRequest struct {
+	TargetUserID string `json:"targetUserId"`
+	SDP          string `json:"sdp"`
 }
 
-type TokenResponse struct {
-	Token       string `json:"token"`
-	ChannelName string `json:"channelName"`
+type AnswerRequest struct {
+	TargetUserID string `json:"targetUserId"`
+	SDP          string `json:"sdp"`
 }
 
-type CallWithToken struct {
-	Call         Call          `json:"call"`
-	TokenRequest TokenResponse `json:"tokenRequest"`
+type IceCandidateRequest struct {
+	TargetUserID  string `json:"targetUserId"`
+	Candidate     string `json:"candidate"`
+	SdpMid        string `json:"sdpMid"`
+	SdpMLineIndex int    `json:"sdpMLineIndex"`
 }
 
 type EndCallRequest struct {
-	CallId    string `json:"CallId"`
-	EndedAt   string `json:"endedAt"`
-	StartedAt string `json:"startedAt"`
-}
-
-type UpdateCallRequest struct {
-	CallId string     `json:"CallId"`
-	Status CallStatus `json:"status"`
-	UserId string     `json:"userId"` // user to be notified
+	TargetUserID string `json:"targetUserId"`
+	Reason       string `json:"reason"` // "hangup", "rejected", "busy"
 }
